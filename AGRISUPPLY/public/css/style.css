@@ -1,0 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #e5e7eb;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --accent: #296218;
+    --accent-hover: #1f4f13;
+    --hover-bg: #f3f4f6;
+    --active-bg: #296218;
+    --active-text: #ffffff;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Print Styles - Global */
+@media print {
+    body {
+        overflow: visible !important;
+        min-height: auto !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    .container {
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+    
+    .details {
+        width: 100% !important;
+        left: 0 !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: white !important;
+    }
+    
+    /* Hide sidebar and header during print */
+    .navigation,
+    .main-header,
+    header,
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Table fixes */
+    .table,
+    .supplies-table,
+    .equipment-table,
+    .report-table {
+        width: 100% !important;
+        table-layout: auto !important;
+        overflow: visible !important;
+        max-width: none !important;
+    }
+    
+    .table-container,
+    .supplies-table-container,
+    .table-responsive {
+        overflow: visible !important;
+    }
+    
+    .table th,
+    .table td,
+    .supplies-table th,
+    .supplies-table td,
+    .equipment-table th,
+    .equipment-table td,
+    .report-table th,
+    .report-table td {
+        overflow: visible !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+    }
+    
+    /* Page break settings */
+    tr, thead, tbody, th, td {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    /* Print page settings */
+    @page {
+        size: landscape;
+        margin: 0.5cm;
+    }
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+/* SIDEBAR STYLES */
+.navigation {
+    position: fixed;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    border-right: 2px solid var(--sidebar-border);
+    transition: 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.navigation ul {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 120%;
+    list-style: none;
+    margin: 3px 12px;
+    border-radius: 8px;
+}
+
+/* Brand/Logo styling */
+.navigation ul li:nth-child(1) {
+    margin-bottom: 32px;
+    margin: 0 0 32px 0;
+    pointer-events: none;
+    border-radius: 0;
+}
+
+.navigation ul li:nth-child(1) a {
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--sidebar-border);
+    margin: 0;
+    border-radius: 0;
+}
+
+.navigation ul li:nth-child(1) a .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.navigation ul li:nth-child(1) a .icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    border-radius: 8px;
+    color: white;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+}
+
+.navigation ul li:nth-child(1) a .icon ion-icon {
+    font-size: 20px;
+}
+
+/* Regular navigation items */
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 24px);
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin: 0 12px;
+}
+
+.navigation ul li a:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+}
+
+.navigation ul li.hovered a {
+    background: var(--active-bg);
+    color: var(--active-text);
+}
+
+.navigation ul li.hovered a:hover {
+    background: var(--accent-hover);
+    color: var(--active-text);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+.navigation ul li a .icon ion-icon {
+    font-size: 20px;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+/* Main content area */
+.details {
+    position: relative;
+    width: calc(100% - 280px) !important; /* Changed from 300px to 280px */
+    left: 280px !important; /* Changed from 300px to 280px */
+    min-height: 100vh;
+    background: #f5f5f5;
+    transition: 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Optional: Add section grouping */
+.nav-section {
+    margin-bottom: 24px;
+}
+
+.nav-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 16px 8px;
+    margin-top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navigation {
+        transform: translateX(-100%);
+    }
+    
+    .details {
+        width: 100%;
+        left: 0;
+    }
+}
+
+.brand-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    background: white;
+    padding: 2px;
+}
+
+.brand-container {
+    background: transparent;
+    border-radius: 50%;
+    color: white;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation ul li:nth-child(1) a .brand-container {
+    background: transparent;
+    border-radius: 50%;
+    color: white;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dropdown container */
+.navigation ul li.dropdown {
+    position: relative;
+}
+
+/* Dropdown menu */
+.navigation ul li.dropdown .dropdown-menu {
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    background: transparent;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    margin: 0;
+    padding: 0;
+    margin-left: 0; 
+    margin-top: 2px; 
+}
+
+/* Show dropdown when open */
+.navigation ul li.dropdown.open .dropdown-menu {
+    max-height: 200px; 
+    padding: 8px 0;
+}
+
+.dropdown-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.navigation ul li.dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.navigation ul li.dropdown .dropdown-menu {
+    list-style: none;
+    padding-left: 0;
+}
+
+.navigation ul li.dropdown .dropdown-menu li {
+    width: calc(100% - 24px);
+    margin: 3px 12px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.navigation ul li.dropdown .dropdown-menu li a {
+    padding: 12px 16px; 
+    padding-left: 48px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    color: var(--text-secondary);
+    border-radius: 8px;
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+/* Hover states for dropdown items */
+.navigation ul li.dropdown .dropdown-menu li a:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+}
+
+.navigation ul li.dropdown .dropdown-menu li a:hover .icon {
+    color: var(--text-primary);
+}
+
+.navigation ul li.dropdown .dropdown-menu li.hovered a {
+    background: var(--active-bg);
+    color: var(--active-text);
+}
+
+.navigation ul li.dropdown .dropdown-menu li.hovered a .icon {
+    color: var(--active-text);
+}
+
+.navigation ul li.dropdown .dropdown-menu li.hovered a:hover {
+    background: var(--accent-hover);
+    color: var(--active-text);
+}
+
+/* Parent dropdown item when open */
+.navigation ul li.dropdown.open > a,
+.navigation ul li.dropdown.active > a {
+    background: var(--active-bg) !important;
+    color: var(--active-text) !important;
+}
+
+/* Make Generate Cards text white when active */
+.navigation ul li.dropdown.active > a .title {
+    color: var(--active-text);
+}
+
+/* Keep the hovered state for active dropdown parent */
+.navigation ul li.dropdown.hovered.open > a {
+    background: var(--active-bg);
+    color: var(--active-text);
+}
+
+/* Icon styling for dropdown items */
+.navigation ul li.dropdown .dropdown-menu li a .icon {
+    min-width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; 
+    border-radius: 0; 
+    color: inherit; 
+}
+
+.navigation ul li.dropdown .dropdown-menu li a .icon ion-icon {
+    font-size: 20px;
+    color: inherit; 
+}
+
+.navigation ul li.dropdown .dropdown-menu li a .title {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+/* Ensure dropdown items are not blocked by other elements */
+.navigation ul li.dropdown .dropdown-menu {
+    z-index: 10;
+}
+
+/* Ensure active dropdown menu items have white text */
+.navigation ul li.dropdown .dropdown-menu li.active a .title {
+    color: var(--active-text);
+}
+
+/* Fix any potential overlay issues */
+.navigation ul li.dropdown .dropdown-menu li:first-child {
+    margin-top: 4px;
+}
+
+.navigation ul li.dropdown .dropdown-menu li:last-child {
+    margin-bottom: 4px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal-close {
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+}
+
+.modal-close:hover {
+    opacity: 0.7;
+}
+
+.modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-box {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    transition: box-shadow 0.2s ease;
+}
+
+.about-box:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-box h3 {
+    margin: 0 0 12px 0;
+    color: var(--accent);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.about-box p {
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 14px;
+}
